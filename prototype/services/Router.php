@@ -19,10 +19,6 @@ class Router
                 $this->ac->home();
             }
 
-            else if($_GET['route'] === 'logout') {
-                $this->ac->logout();
-            }
-
             else if($_GET['route'] === 'login') {
                 $this->ac->login();
             }
