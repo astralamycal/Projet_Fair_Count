@@ -1,0 +1,16 @@
+{
+    "require": {
+        "twig/twig": "^3.22"
+    },
+    "autoload": {
+        "classmap": [
+            "controllers/",
+            "models/",
+            "manager/",
+            "services/"
+    ]
+  },
+  "require-dev": {
+    "symfony/var-dumper": "^7.4"
+  }
+}
