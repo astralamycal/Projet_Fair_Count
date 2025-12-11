@@ -28,3 +28,9 @@ un fichier .env pour les infos de base de données
 utiliser l'autoload de composer
 
 chacun travaille sur les quatres languages
+
+if dans le html pour accèder au page admin si compte admin
+
+page 404
+
+findById et findByEmail → UserManager (utile pour les controllers)
