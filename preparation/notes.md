@@ -43,8 +43,7 @@ Admin :
 - index
 - create
 - update
-- list
-- show
+- show → show_depense / show_refund
 
 User :
 
@@ -53,6 +52,7 @@ User :
 - login
 - register
 - create_depense
-- categorise_depense
-- list_depense
+- create_refund
 - show_depense
+- show_refund
+- 404
