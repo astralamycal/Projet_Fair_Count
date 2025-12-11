@@ -1,6 +1,6 @@
 <?php
 class Remboursement{
-    public function __construct(private int $id, private int $montant, private User $auteur, private User $receveur){
+    public function __construct(private int $montant, private User $auteur, private User $receveur, private ? int $id = null){
     }
 
     public function getId(): int{

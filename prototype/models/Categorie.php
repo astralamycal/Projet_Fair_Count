@@ -1,6 +1,6 @@
 <?php
 class categorie{
-    public function __construct(private int $id, private string $nom){
+    public function __construct(private string $nom, private ? int $id = null){
     }
 
     public function getId(): int{

@@ -1,6 +1,6 @@
 <?php
 class Depense{
-    public function __construct(private int $id, private Category $category, private int $amount, private User $auteur, private DateTime $date, private string $motif){
+    public function __construct(private Category $category, private int $amount, private User $auteur, private DateTime $date, private string $motif, private ? int $id = null){
     }
 
     public function getId(): int{

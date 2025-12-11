@@ -1,6 +1,6 @@
 <?php
 class User{
-    public function __construct(private int $id, private string $username, private string $password, private string $email, private string $role){
+    public function __construct( private string $username, private string $email, private string $password, private string $role, private ? int $id = null){
     }
 
     public function getId(): int{
