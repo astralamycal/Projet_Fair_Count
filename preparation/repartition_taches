@@ -1,9 +1,10 @@
 Nathan:
 - Composer setup
-- Ajout du prototype de l'architechture de dossier avec les fichiers de bases
+- Ajout du prototype de l'architechture de dossier avec les fichiers de bases 
 
 Sofiane:
-- Création base de données
+- Création base de données 
+- création du Router.php
 
 Amy:
 - prototype base de données

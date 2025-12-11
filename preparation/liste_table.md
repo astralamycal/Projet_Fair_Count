@@ -1,10 +1,11 @@
 liste table :
 - users
+    - id (int A.I)
     - username (varchar 255)
     - email (varchar 255)
     - password (varchar 255)
     - role (varchar 255)
-    - id (int A.I)
+
 
 - depenses
     - categorie (foreign key --> categorie.id)
