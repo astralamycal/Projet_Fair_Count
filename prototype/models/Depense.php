@@ -1,18 +1,18 @@
 <?php
 class Depense{
-    public function __construct(private Category $category, private int $amount, private User $auteur, private DateTime $date, private string $motif, private ? int $id = null){
+    public function __construct(private Categorie $categorie, private int $montant, private User $auteur, private DateTime $date, private string $motif, private ? int $id = null){
     }
 
     public function getId(): int{
         return $this->id;
     }
 
-    public function getCategory(): Category{
-        return $this->category;
+    public function getCategory(): Categorie{
+        return $this->categorie;
     }
 
-    public function getAmount(): int{
-        return $this->amount;
+    public function getMontant(): int{
+        return $this->montant;
     }
 
     public function getAuteur(): User{
@@ -27,12 +27,12 @@ class Depense{
         return $this->motif;
     }
 
-    public function setCategory(Category $category): void{
-        $this->category = $category;
+    public function setCategory(Categorie $categorie): void{
+        $this->categorie = $categorie;
     }
 
-    public function setAmount(int $amount): void{
-        $this->amount = $amount;
+    public function setMontant(int $amount): void{
+        $this->montant = $montant;
     }
 
     public function setAuteur(User $auteur): void{

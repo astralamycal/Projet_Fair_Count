@@ -18,7 +18,7 @@ class UserManager extends AbstractManager{
     }
 
     public function update(User $user): User{
-        $query = $this->db->prepare("UPDATE users SET firstName = :firstName, lastName = :lastName, email = :email, password = :password, created_at = :created_at WHERE id = :id;");
+        $query = $this->db->prepare("UPDATE users SET username = :username, email = :email, password = :password, role = :role WHERE id = :id;");
         $parameters = [
             "id" => $user->getId(),
             "username" => $user->getUsername(),
@@ -47,20 +47,22 @@ class UserManager extends AbstractManager{
         $users = [];
 
         foreach($results as $result){
-            $users[] = new User($result["firstName"], $result["lastName"], $result["email"], $result["password"], new DateTime($result["created_at"]), $result["id"]);
+            $users[] = new User($result["username"], $result["email"], $result["password"], new $result["role"], $result["id"]);
         }
 
         return $users;
     }
 
-    public function findOne(int $id): User{
+    public function findById(int $id): ? User{
         $query = $this->db->prepare("SELECT * FROM users WHERE id = :id;");
         $parameters = ["id" => $id];
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
         if(isset($result)){
-            return new User($result["firstName"], $result["lastName"], $result["email"], $result["password"], new DateTime($result["created_at"]), $result["id"]);
+            return new User($result["username"], $result["email"], $result["password"], new $result["role"], $result["id"]);
         }
+
+        return null;
     }
 }
