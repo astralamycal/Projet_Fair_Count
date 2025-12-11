@@ -4,6 +4,8 @@ liste table :
     - username (varchar 255)
     - password (varchar 255)
     - email (varchar 255)
+    - role (varchar 255)
+
 
 - depenses
     - id (int A.I)
@@ -13,12 +15,12 @@ liste table :
     - date (datetime)
     - motif (varchar 1024)
 
-- categorie
+- categories
     - id (int A.I)
     - nom (varchar 255)
 
 
-- remboursement
+- remboursements
     - id (int A.I)
     - montant (int)
     - date (datetime)
