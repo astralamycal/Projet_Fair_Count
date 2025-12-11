@@ -48,7 +48,7 @@ Admin :
 User :
 
 - home
-- profil
+- profile
 - login
 - register
 - create_depense
