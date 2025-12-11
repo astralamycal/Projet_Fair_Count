@@ -4,6 +4,7 @@ liste table :
     - username (varchar 255)
     - password (varchar 255)
     - email (varchar 255)
+    - role (varchar 255)
 
 - depenses
     - id (int A.I)
