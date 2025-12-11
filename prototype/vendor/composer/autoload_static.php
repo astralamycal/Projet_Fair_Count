@@ -50,7 +50,20 @@ class ComposerStaticInit1d4d780984e01f3585417b5a14d9ae39
     );
 
     public static $classMap = array (
+        'AbstractController' => __DIR__ . '/../..' . '/controllers/AbstractController.php',
+        'AbstractManager' => __DIR__ . '/../..' . '/manager/AbstractManager.php',
+        'AuthController' => __DIR__ . '/../..' . '/controllers/AuthController.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Depense' => __DIR__ . '/../..' . '/models/Depense.php',
+        'DepenseManager' => __DIR__ . '/../..' . '/manager/DepenseManager.php',
+        'Remboursement' => __DIR__ . '/../..' . '/models/Remboursement.php',
+        'RemboursementManager' => __DIR__ . '/../..' . '/manager/RemboursementManager.php',
+        'Router' => __DIR__ . '/../..' . '/services/Router.php',
+        'User' => __DIR__ . '/../..' . '/models/User.php',
+        'UserController' => __DIR__ . '/../..' . '/controllers/UserController.php',
+        'UserManager' => __DIR__ . '/../..' . '/manager/UserManager.php',
+        'categorie' => __DIR__ . '/../..' . '/models/Categorie.php',
+        'categorieManager' => __DIR__ . '/../..' . '/manager/CategorieManager.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
