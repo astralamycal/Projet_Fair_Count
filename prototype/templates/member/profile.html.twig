@@ -8,4 +8,38 @@
     <main class="py-5 container">
         <h1>Page de profil</h1>
     </main>
+
+    <h2>Liste des dépenses</h2>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Pseudo
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in data %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        <a href="index.php?route=show&id={{ user.id }}" class="btn btn-info"><span class="bi bi-eye"></span></a>
+                        <a href="index.php?route=update&id={{ user.id }}" class="btn btn-success"><span class="bi bi-pencil"></span></a>
+                        <a href="index.php?route=delete&id={{ user.id }}" class="btn btn-danger"><span class="bi bi-trash"></span></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

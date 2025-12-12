@@ -1,49 +1,62 @@
 <?php
-class Depense{
-    public function __construct(private Categorie $categorie, private int $montant, private User $auteur, private DateTime $date, private string $motif, private ? int $id = null){
+class Depense
+{
+    public function __construct(private Categorie $categorie, private int $montant, private User $auteur, private DateTime $date, private string $motif, private ?int $id = null)
+    {
     }
 
-    public function getId(): int{
+    public function getId(): int
+    {
         return $this->id;
     }
 
-    public function getCategory(): Categorie{
+    public function getCategorie(): Categorie
+    {
         return $this->categorie;
     }
 
-    public function getMontant(): int{
+    public function getMontant(): int
+    {
         return $this->montant;
     }
 
-    public function getAuteur(): User{
+    public function getAuteur(): User
+    {
         return $this->auteur;
     }
 
-    public function getDate(): DateTime{
+    public function getDate(): DateTime
+    {
         return $this->date;
     }
 
-    public function getMotif(): string{
+    public function getMotif(): string
+    {
         return $this->motif;
     }
 
-    public function setCategory(Categorie $categorie): void{
+    public function setCategory(Categorie $categorie): void
+    {
         $this->categorie = $categorie;
     }
 
-    public function setMontant(int $amount): void{
+    public function setMontant(int $amount): void
+    {
         $this->montant = $montant;
     }
 
-    public function setAuteur(User $auteur): void{
+    public function setAuteur(User $auteur): void
+    {
         $this->auteur = $auteur;
     }
 
-    public function setDate(DateTime $date): void{
+    public function setDate(DateTime $date): void
+    {
         $this->date = $date;
     }
 
-    public function setMotif(string $motif): void{
+    public function setMotif(string $motif): void
+    {
         $this->motif = $motif;
     }
 }
