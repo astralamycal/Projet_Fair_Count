@@ -1,6 +1,7 @@
 Nathan:
 - Composer setup
-- Ajout du prototype de l'architechture de dossier avec les fichiers de bases 
+- Ajout du prototype de l'architechture de dossier avec les fichiers de bases
+- des controllers
 
 Sofiane:
 - Création base de données 
@@ -9,3 +10,5 @@ Sofiane:
 Amy:
 - prototype base de données
 - tous les models
+- tous les managers
+- valeurs par défaut dans la base de données
