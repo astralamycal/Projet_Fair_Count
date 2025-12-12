@@ -61,12 +61,12 @@ class UserController extends AbstractController
         if ($_SESSION['role'] === 'ADMIN') 
         {
             $userManager = new UserManager();
-            $user = $userManager->findById($_GET["id"]);
+            $user = $userManager->findById((int)$_GET["id"]);
             var_dump($user);
 
             if (isset($_POST["username"], $_POST["email"], $_POST["password"], $_POST["role"]))
             {
-                $userManager->update(new User($_POST["username"], $_POST["email"], password_hash($_POST["password"], PASSWORD_DEFAULT), $_POST["role"], $_GET["id"]));
+                $userManager->update(new User($_POST["username"], $_POST["email"], password_hash($_POST["password"], PASSWORD_DEFAULT), $_POST["role"], (int)$_GET["id"]));
                 $this->list();
             }
 
