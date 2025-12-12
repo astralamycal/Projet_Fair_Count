@@ -62,10 +62,11 @@ class UserController extends AbstractController
         {
             $userManager = new UserManager();
             $user = $userManager->findById($_GET["id"]);
+            var_dump($user);
 
             if (isset($_POST["username"], $_POST["email"], $_POST["password"], $_POST["role"]))
             {
-                $userManager->update(new User($_POST["username"], $_POST["email"], password_hash($_POST["password"], PASSWORD_DEFAULT), $_POST["role"], $_GET("id")));
+                $userManager->update(new User($_POST["username"], $_POST["email"], password_hash($_POST["password"], PASSWORD_DEFAULT), $_POST["role"], $_GET["id"]));
                 $this->list();
             }
 
@@ -104,6 +105,11 @@ class UserController extends AbstractController
             }
 
             $this->render('admin/users/index.html.twig', ['data' => $data]);
+        }
+
+        else 
+        {
+            $this->redirect('index.php?route=notFound');
         }
     }
 
