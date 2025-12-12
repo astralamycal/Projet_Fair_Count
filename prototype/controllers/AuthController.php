@@ -4,7 +4,7 @@ class AuthController extends AbstractController
 {
     public function home() : void
     {
-        $this->render('lien du home', []);
+        $this->render('templates/home/home.html.twig', []);
     }
 
     public function login() : void
