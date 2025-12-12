@@ -45,9 +45,7 @@ class RemboursementManager extends AbstractManager{
         $remboursements = [];
 
         foreach($results as $result){
-            $remboursements[] = new Remboursement($result["montant"], $userManager->getById($result["auteur"]), $userManager->getById($result["receveur"],
-            $result["montant"],
-            $result["id"]));
+            $remboursements[] = new Remboursement($result["montant"], $userManager->getById($result["auteur"]), $userManager->getById($result["receveur"], $result["montant"], $result["id"]));
         }
 
         return $users;
