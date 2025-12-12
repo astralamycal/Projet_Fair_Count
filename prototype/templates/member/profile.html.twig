@@ -7,39 +7,82 @@
 {% block main %}
     <main class="py-5 container">
         <h1>Page de profil</h1>
+        
+        <h2>Liste des dépenses</h2>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        montant
+                    </th>
+                    <th>
+                        date
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for depense in data.depenses %}
+                    <tr>
+                        <td>{{ depense.id }}</td>
+                        <td>{{ depense.date }}</td>
+                        <td>{{ depense.montant }}</td>
+                        <td>
+                            <a href="index.php?route=show&id={{ depense.id }}" class="btn btn-info"><span class="bi bi-eye"></span></a>
+                            <a href="index.php?route=update&id={{ depense.id }}" class="btn btn-success"><span class="bi bi-pencil"></span></a>
+                            <a href="index.php?route=delete&id={{ depense.id }}" class="btn btn-danger"><span class="bi bi-trash"></span></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Liste des remboursements</h2>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        montant
+                    </th>
+                    <th>
+                        auteur
+                    </th>
+                    <th>
+                        receveur
+                    </th>
+                    <th>
+                        motif
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for remboursement in data.remboursements %}
+                    <tr>
+                        <td>{{ remboursement.id }}</td>
+                        <td>{{ remboursement.montant }}</td>
+                        <td>{{ remboursement.auteur }}</td>
+                        <td>{{ remboursement.receveur }}</td>
+                        <td>{{ remboursement.motif }}</td>
+                        <td>
+                            <a href="index.php?route=show&id={{ remboursement.id }}" class="btn btn-info"><span class="bi bi-eye"></span></a>
+                            <a href="index.php?route=update&id={{ remboursement.id }}" class="btn btn-success"><span class="bi bi-pencil"></span></a>
+                            <a href="index.php?route=delete&id={{ remboursement.id }}" class="btn btn-danger"><span class="bi bi-trash"></span></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </main>
 
-    <h2>Liste des dépenses</h2>
-    <table class="table table-striped mt-3">
-        <thead>
-            <tr>
-                <th>
-                    #
-                </th>
-                <th>
-                    Pseudo
-                </th>
-                <th>
-                    Email
-                </th>
-                <th>
-                    Actions
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for user in data %}
-                <tr>
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.username }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>
-                        <a href="index.php?route=show&id={{ user.id }}" class="btn btn-info"><span class="bi bi-eye"></span></a>
-                        <a href="index.php?route=update&id={{ user.id }}" class="btn btn-success"><span class="bi bi-pencil"></span></a>
-                        <a href="index.php?route=delete&id={{ user.id }}" class="btn btn-danger"><span class="bi bi-trash"></span></a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
 {% endblock %}
