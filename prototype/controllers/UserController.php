@@ -61,20 +61,17 @@ class UserController extends AbstractController
         if ($_SESSION['role'] === 'ADMIN') 
         {
             $userManager = new UserManager();
-            $user = $userManager->findById($_GET['id']);
-            
-            $data = [
-                'id' => $user->getId(),
-                'username' => $user->getUsername(),
-                'email' => $user->getEmail(),
-                'password' => $user->getPassword(),
-                'role' => $user->getRole()
-            ];
+            $user = $userManager->findById($_GET["id"]);
 
-            $newUser = new User($_POST['username'], $_POST['email'], password_hash($_POST['password'],PASSWORD_DEFAULT), $_POST['role'], $data['id']);
-            $userManager->update($newUser);
+            if (isset($_POST["username"], $_POST["email"], $_POST["password"], $_POST["role"]))
+            {
+                $userManager->update(new User($_POST["username"], $_POST["email"], password_hash($_POST["password"], PASSWORD_DEFAULT), $_POST["role"], $_GET("id")));
+                $this->list();
+            }
 
-            $this->render('admin/users/update.html.twig', ['data' => $data]);
+            else{
+                $this->render('admin/users/update.html.twig', ['id' => $user->getId(), 'username' => $user->getUsername(), 'email' => $user->getEmail(), 'role' => $user->getRole()]);
+            }
         }
     }
 
@@ -120,7 +117,6 @@ class UserController extends AbstractController
             $data = [
                 'id' => $user->getId(),
                 'username' => $user->getUsername(),
-                'lastName' => $user->getlastName(),
                 'email' => $user->getEmail(),
                 'role' => $user->getRole()
             ];
