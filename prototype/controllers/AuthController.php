@@ -4,7 +4,18 @@ class AuthController extends AbstractController
 {
     public function home() : void
     {
-        $this->render('home/home.html.twig', []);
+        if (isset($_SESSION["id"], $_SESSION["role"])) {
+            if ($_SESSION["role"] === 'ADMIN')
+            {
+                $role = $_SESSION['role'];
+                $this->render('home/home.html.twig', ['role'=> $role]);
+            }
+
+        else
+        {
+            $this->render('home/home.html.twig', []);
+        }
+    }
     }
 
     public function login() : void

@@ -22,6 +22,11 @@
                     {#<li>
                         <a class="nav-link" href="index.php?route=logout">Déconnexion</a>
                     </li>#}
+                    {%if role %}
+                        <li>
+                            <a class="nav-link" href="index.php?route=list">Admin</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
