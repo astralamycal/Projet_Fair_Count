@@ -51,7 +51,7 @@ class categorieManager extends AbstractManager{
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
-        if(isset($result)){
+        if($result !== null){
             return new Categorie($result["nom"], $result["id"]);
         }
     }

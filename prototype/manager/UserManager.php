@@ -59,7 +59,7 @@ class UserManager extends AbstractManager{
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
-        if(isset($result)){
+        if($result !== null){
             return new User($result["username"], $result["email"], $result["password"], $result["role"], $result["id"]);
         }
 
@@ -72,7 +72,7 @@ class UserManager extends AbstractManager{
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
-        if(isset($result)){
+        if($result !== null){
             return new User($result["username"], $result["email"], $result["password"], $result["role"], $result["id"]);
         }
 

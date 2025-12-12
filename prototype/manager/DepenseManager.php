@@ -63,7 +63,7 @@ class DepenseManager extends AbstractManager{
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
-        if(isset($result)){
+        if($result !== null){
             return new Depense($categorieManager->findById($result["categorie"]), $result["montant"], $userManager->findById($result["auteur"]), new DateTime($result["date"]), $result["motif"], $result["id"]);
         }
     }
