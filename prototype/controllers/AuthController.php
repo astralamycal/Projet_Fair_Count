@@ -21,6 +21,7 @@ class AuthController extends AbstractController
                 {
                     $_SESSION["id"] = $tempUser->getId();
                     $_SESSION["role"] = $tempUser->getRole();
+                    var_dump($_SESSION);
                     $this->render('member/profile.html.twig', []);
                 }
 
