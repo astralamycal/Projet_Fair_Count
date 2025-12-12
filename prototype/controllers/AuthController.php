@@ -21,26 +21,26 @@ class AuthController extends AbstractController
                 {
                     $_SESSION["id"] = $tempUser->getId();
                     $_SESSION["role"] = $tempUser->getRole();
-                    $this->render('lien du profil', []);
+                    $this->render('templates/member/profile.html.twig', []);
                 }
 
                 else
                 {
                     echo "Erreur : Le mot de passe n'est pas correct.";
-                    $this->render('lien du login', []);
+                    $this->render('templates/auth/login.html.twig', []);
                 }
             }
 
             else
             {
                 echo "Erreur : L'adresse email ne correspond pas.";
-                $this->render('lien du login', []);
+                $this->render('templates/auth/login.html.twig', []);
             }
         }
         
         else
         {
-            $this->render('lien du login', []);
+            $this->render('templates/auth/login.html.twig', []);
         }
     }
 
@@ -65,7 +65,7 @@ class AuthController extends AbstractController
                     $hashed_password = password_hash($_POST['password'],PASSWORD_DEFAULT);
                     $user = new User($_POST['username'], $_POST['email'], $hashed_password, 'USER');
                     $userManager->create($user);
-                    $this->render('lien du login', []);
+                    $this->render('templates/auth/login.html.twig', []);
                 }
 
                 else
@@ -82,7 +82,7 @@ class AuthController extends AbstractController
         
         else
         {
-            $this->render('lien du register', []);
+            $this->render('templates/auth/register.html.twig', []);
         }
         
         
@@ -90,6 +90,6 @@ class AuthController extends AbstractController
 
     public function notFound() : void
     {
-        $this->render('lien page 404', []);
+        $this->render('templates/error/notFound.html.twig', []);
     }
 }
