@@ -10,18 +10,18 @@ class RemboursementManager extends AbstractManager{
             "montant" => $remboursement->getMontant(),
             "auteur" => $remboursement->getAuteur()->getId(),
             "receveur" => $remboursement->getReceveur()->getId(),
-            ""
+            "motif" => $remboursement->getMotif()
         ];
 
         $query->execute($parameters);
     }
 
     public function update(Remboursement $remboursement): Remboursement{
-        $query = $this->db->prepare("UPDATE users SET montant = :montant, auteur = :auteur, receveur = :receveur, WHERE id = :id;");
+        $query = $this->db->prepare("UPDATE users SET montant = :montant, auteur = :auteur, receveur = :receveur, motif = :motif WHERE id = :id;");
         $parameters = [
             "montant" => $remboursement->getMontant(),
-            "auteur" => $remboursement->getAuteur(),
-            "receveur" => $remboursement->getReceveur(),
+            "auteur" => $remboursement->getAuteur()->getId(),
+            "receveur" => $remboursement->getReceveur()->getId(),
             "id" => $remboursement->getId()
         ];
 
