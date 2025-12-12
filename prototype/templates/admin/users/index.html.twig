@@ -15,10 +15,7 @@
                         #
                     </th>
                     <th>
-                        Prénom
-                    </th>
-                    <th>
-                        Nom
+                        Pseudo
                     </th>
                     <th>
                         Email
@@ -32,8 +29,7 @@
                 {% for user in data %}
                     <tr>
                         <td>{{ user.id }}</td>
-                        <td>{{ user.firstName }}</td>
-                        <td>{{ user.lastName }}</td>
+                        <td>{{ user.username }}</td>
                         <td>{{ user.email }}</td>
                         <td>
                             <a href="index.php?route=show&id={{ user.id }}" class="btn btn-info"><span class="bi bi-eye"></span></a>
