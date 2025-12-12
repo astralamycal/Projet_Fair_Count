@@ -5,27 +5,27 @@ class RemboursementManager extends AbstractManager{
     }
 
     public function create(Remboursement $remboursement) : Remboursement{
-        $query = $this->db->prepare("INSERT INTO remboursements(montant, auteur, receveur) VALUES(:montant, :auteur, :receveur);");
+        $query = $this->db->prepare("INSERT INTO remboursements(montant, auteur, receveur, motif) VALUES(:montant, :auteur, :receveur, :motif);");
         $parameters = [
-            "montant" => $user->getMontant(),
-            "auteur" => $user->getAuteur()->getId(),
-            "receveur" => $user->getReceveur()->getId(),
+            "montant" => $remboursement->getMontant(),
+            "auteur" => $remboursement->getAuteur()->getId(),
+            "receveur" => $remboursement->getReceveur()->getId(),
+            ""
         ];
 
         $query->execute($parameters);
-        return $user;
     }
 
     public function update(Remboursement $remboursement): Remboursement{
         $query = $this->db->prepare("UPDATE users SET montant = :montant, auteur = :auteur, receveur = :receveur, WHERE id = :id;");
         $parameters = [
-            "montant" => $user->getMontant(),
-            "auteur" => $user->getAuteur(),
-            "receveur" => $user->getReceveur(),
+            "montant" => $remboursement->getMontant(),
+            "auteur" => $remboursement->getAuteur(),
+            "receveur" => $remboursement->getReceveur(),
+            "id" => $remboursement->getId()
         ];
 
         $query->execute($parameters);
-        return $user;
     }
 
     public function delete(Remboursement $remboursement): void{
@@ -42,10 +42,10 @@ class RemboursementManager extends AbstractManager{
         $query = $this->db->prepare("SELECT * FROM users;");
         $query->execute();
         $results = $query->fetchAll(PDO::FETCH_ASSOC);
-        $users = [];
+        $remboursements = [];
 
         foreach($results as $result){
-            $users[] = new Remboursement($result["montant"], $userManager->getById($result["auteur"]), $userManager->getById($result["receveur"],
+            $remboursements[] = new Remboursement($result["montant"], $userManager->getById($result["auteur"]), $userManager->getById($result["receveur"],
             $result["montant"],
             $result["id"]));
         }

@@ -1,6 +1,6 @@
 <?php
 class Remboursement{
-    public function __construct(private int $montant, private User $auteur, private User $receveur, private ? int $id = null){
+    public function __construct(private int $montant, private User $auteur, private User $receveur, private string $motif, private ? int $id = null){
     }
 
     public function getId(): int{
@@ -19,6 +19,10 @@ class Remboursement{
         return $this->receveur;
     }
 
+    public function getMotif(): string{
+        return $this->motif;
+    }
+
     public function setMontant(int $montant): void{
         $this->montant = $montant;
     }
@@ -29,5 +33,9 @@ class Remboursement{
 
     public function setReceveur(User $receveur): void{
         $this->receveur = $receveur;
+    }
+
+    public function setMotif(string $motif): void{
+        $this->motif = $motif;
     }
 }

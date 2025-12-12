@@ -5,7 +5,7 @@ class DepenseManager extends AbstractManager{
     }
 
     public function create(Depense $depense) : Depense{
-        $query = $this->db->prepare("INSERT INTO depenses(categorie, montant, auteur, date, motif) VALUES(:categorie, :montant, :date, :motif, :created_at);");
+        $query = $this->db->prepare("INSERT INTO depenses(categorie, montant, auteur, date, motif) VALUES(:categorie, :montant, :date, :motif);");
         $parameters = [
             "categorie" => $depense->getCategorie()->getId(),
             "montant" => $depense->getMontant(),
@@ -15,7 +15,6 @@ class DepenseManager extends AbstractManager{
         ];
 
         $query->execute($parameters);
-        return $user;
     }
 
     public function update(Depense $depense): Depense{
@@ -30,7 +29,6 @@ class DepenseManager extends AbstractManager{
         ];
 
         $query->execute($parameters);
-        return $user;
     }
 
     public function delete(Depense $depense): void{
@@ -43,16 +41,18 @@ class DepenseManager extends AbstractManager{
     }
 
     public function findAll(): array{
+        $categorieManager = new CategorieManager();
+        $userManager = new UserManager();
         $query = $this->db->prepare("SELECT * FROM depenses;");
         $query->execute();
         $results = $query->fetchAll(PDO::FETCH_ASSOC);
-        $users = [];
+        $depenses = [];
 
         foreach($results as $result){
-            $users[] = new Depense($result["firstName"], $result["lastName"], $result["email"], $result["password"], new DateTime($result["created_at"]), $result["id"]);
+            $depenses[] = new Depense($categorieManager->findById($result["categorie"]), $result["montant"], $userManager->findById($result["auteur"]), new DateTime($result["date"]), $result["motif"], $result["id"]);
         }
 
-        return $users;
+        return $depenses;
     }
 
     public function findById(int $id): Depense{
@@ -64,7 +64,7 @@ class DepenseManager extends AbstractManager{
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
         if(isset($result)){
-            return new Depense($categorieManager->findById($result["firstName"]), $result["montant"], $userManager->findById($result["auteur"]), new DateTime($result["date"]), $result["motif"], $result["id"]);
+            return new Depense($categorieManager->findById($result["categorie"]), $result["montant"], $userManager->findById($result["auteur"]), new DateTime($result["date"]), $result["motif"], $result["id"]);
         }
     }
 }

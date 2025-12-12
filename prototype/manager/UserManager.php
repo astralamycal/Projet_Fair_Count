@@ -65,4 +65,17 @@ class UserManager extends AbstractManager{
 
         return null;
     }
+
+    public function findByEmail(string $email): ? User{
+        $query = $this->db->prepare("SELECT * FROM users WHERE email = :email;");
+        $parameters = ["id" => $id];
+        $query->execute($parameters);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+
+        if(isset($result)){
+            return new User($result["username"], $result["email"], $result["password"], new $result["role"], $result["id"]);
+        }
+
+        return null;
+    }
 }

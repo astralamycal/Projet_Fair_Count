@@ -11,7 +11,6 @@ class categorieManager extends AbstractManager{
         ];
 
         $query->execute($parameters);
-        return $user;
     }
 
     public function update(Categorie $categorie): Categorie{
@@ -22,7 +21,6 @@ class categorieManager extends AbstractManager{
         ];
 
         $query->execute($parameters);
-        return $user;
     }
 
     public function delete(Categorie $categorie): void{
@@ -41,10 +39,10 @@ class categorieManager extends AbstractManager{
         $users = [];
 
         foreach($results as $result){
-            $users[] = new Categorie($result["nom"], $result["id"]);
+            $categories[] = new Categorie($result["nom"], $result["id"]);
         }
 
-        return $users;
+        return $categories;
     }
 
     public function findById(int $id): Categorie{
