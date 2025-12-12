@@ -60,7 +60,7 @@ class RemboursementManager extends AbstractManager{
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
-        if($result !== null){
+        if($result){
             return new Remboursement($result["montant"], $userManager->getById($result["auteur"]), $userManager->getById($result["receveur"]), $result["motif"], $result["id"]);
         }
     }
