@@ -47,7 +47,7 @@ class categorieManager extends AbstractManager{
         return $users;
     }
 
-    public function findById(int $id): User{
+    public function findById(int $id): Categorie{
         $query = $this->db->prepare("SELECT * FROM categories WHERE id = :id;");
         $parameters = ["id" => $id];
         $query->execute($parameters);
