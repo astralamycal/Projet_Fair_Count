@@ -5,14 +5,28 @@ class UserController extends AbstractController
 
     public function profile() :void
     {
-        if (isset($_SESSION["id"]) && isset($_SESSION["role"]))
+        if (isset($_SESSION["id"], $_SESSION["role"])) 
         {
-            $this->render('member/profile.html.twig', []);
+            if ($_SESSION["role"] === 'ADMIN')
+            {
+                $role = $_SESSION['role'];
+
+                if (isset($_SESSION["id"]) && isset($_SESSION["role"]))
+                {
+                    $this->render('member/profile.html.twig', []);
+                }
+
+                else
+                {
+                    $this->render('auth/login.html.twig', []);
+                }
+                $this->render('home/home.html.twig', ['role'=> $role]);
+            }
         }
 
         else
         {
-            $this->render('auth/login.html.twig', []);
+            $this->render('home/home.html.twig', []);
         }
     }
 
@@ -61,17 +75,17 @@ class UserController extends AbstractController
         if ($_SESSION['role'] === 'ADMIN') 
         {
             $userManager = new UserManager();
-            $user = $userManager->findById((int)$_GET["id"]);
-            var_dump($user);
+            $user = $userManager->findById($_GET["id"]);
 
             if (isset($_POST["username"], $_POST["email"], $_POST["password"], $_POST["role"]))
             {
-                $userManager->update(new User($_POST["username"], $_POST["email"], password_hash($_POST["password"], PASSWORD_DEFAULT), $_POST["role"], (int)$_GET["id"]));
+                $userManager->update(new User($_POST["username"], $_POST["email"], password_hash($_POST["password"], PASSWORD_DEFAULT), $_POST["role"], $user->getId()));
                 $this->list();
             }
 
-            else{
-                $this->render('admin/users/update.html.twig', ['id' => $user->getId(), 'username' => $user->getUsername(), 'email' => $user->getEmail(), 'role' => $user->getRole()]);
+            else
+            {
+                $this->render('admin/users/update.html.twig', ['id' => $_GET["id"], 'username' => $user->getUsername(), 'email' => $user->getEmail(), 'role' => $user->getRole()]);
             }
         }
     }
@@ -128,6 +142,65 @@ class UserController extends AbstractController
             ];
 
             $this->render('admin/users/show.html.twig', ['data' => $data]);
+        }
+    }
+
+    public function add(): void
+    {
+        if ($_GET('action') === 'depense')
+        {
+            $depenseManager = new DepenseManager();
+            $user = $depenseManager->findById($_GET['id']);
+
+            if (!empty($_POST))
+            {
+                if ($userManager->findByEmail($_POST['email']) === null) 
+                {
+                    if ($clearPassword === $_POST['password'])
+                    {
+                        $hashed_password = password_hash($_POST['password'],PASSWORD_DEFAULT);
+                        $user = new User($_POST['username'], $_POST['email'], $hashed_password, $_POST['role']);
+                        $userManager->create($user);
+                        $this->list();
+                    }
+
+                    else
+                    {
+                        echo "Erreur : Le mot de passe ne correspond pas.";
+                    }
+                }
+
+                else
+                {
+                    echo "Erreur : L'adresse email existe déjà.";
+                }
+            }
+            
+            else
+            {
+                $this->render('admin/users/create.html.twig', []);
+            }
+
+            $data = [
+                'category'=> $user->getCategorie(),
+                'montant'=> $user->getMontant(),
+                'auteur'=> $user->getAuteur(),
+                'date'=> $user->getDate(),
+                'motif'=> $user->getMotif(),
+            ];
+
+            $this->render('member/add.html.twig', ['data'=> $data]);
+
+        }
+
+        else if ($_GET('action') === 'remboursement')
+        {
+
+        }
+
+        else
+        {
+
         }
     }
 }

@@ -51,6 +51,10 @@ class Router
                 $this->uc->show();
             }
 
+            else if($_GET['rouge'] === 'add') {
+                $this->uc->add();
+            }
+
             else
             {
                 $this->ac->notFound();

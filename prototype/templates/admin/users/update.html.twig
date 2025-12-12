@@ -7,14 +7,14 @@
 {% block main %}
     <main class="py-5 container">
         <h1>Modifier un utilisateur</h1>
-        <form method="post" action="index.php?route=update&id={{ data.id }}">
+        <form method="post" action="index.php?route=update&id={{ id }}">
             <fieldset class="mb-3">
                 <label for="username" class="form-label">Pseudo</label>
-                <input type="text" name="username" id="username" class="form-control" value="{{ data.username }}">
+                <input type="text" name="username" id="username" class="form-control" value="{{ username }}">
             </fieldset>
             <fieldset class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" name="email" id="email" class="form-control" value="{{ data.email }}">
+                <input type="email" name="email" id="email" class="form-control" value="{{ email }}">
             </fieldset>
             <fieldset class="mb-3">
                 <label for="password" class="form-label">Mot de passe</label>
@@ -23,7 +23,7 @@
             <fieldset class="mb-3">
                 <label for="role" class="form-label">Rôle</label>
                 <select class="form-select" id="role" name="role">
-                    <option selected>{{ data.role }}</option>
+                    <option selected>{{ role }}</option>
                     <option value="USER">USER</option>
                     <option value="ADMIN">ADMIN</option>
                 </select>

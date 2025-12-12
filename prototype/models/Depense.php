@@ -40,7 +40,7 @@ class Depense
         $this->categorie = $categorie;
     }
 
-    public function setMontant(int $amount): void
+    public function setMontant(int $montant): void
     {
         $this->montant = $montant;
     }
