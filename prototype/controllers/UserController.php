@@ -7,12 +7,12 @@ class UserController extends AbstractController
     {
         if (isset($_SESSION["id"]) && isset($_SESSION["role"]))
         {
-            $this->render('lien page profil', []);
+            $this->render('templates/member/profile.html.twig', []);
         }
 
         else
         {
-            $this->render('lien page login', []);
+            $this->render('templates/auth/login.html.twig', []);
         }
     }
 
@@ -50,7 +50,7 @@ class UserController extends AbstractController
             
             else
             {
-                $this->render('lien page create', []);
+                $this->render('templates/admin/users/create.html.twig', []);
             }
             
         }
@@ -74,7 +74,7 @@ class UserController extends AbstractController
             $newUser = new User($_POST['username'], $_POST['email'], password_hash($_POST['password'],PASSWORD_DEFAULT), $_POST['role'], $data['id']);
             $userManager->update($newUser);
 
-            $this->render('lien page update', ['data' => $data]);
+            $this->render('templates/admin/users/update.html.twig', ['data' => $data]);
         }
     }
 
@@ -106,7 +106,7 @@ class UserController extends AbstractController
                 ];
             }
 
-            $this->render('lien page index', ['data' => $data]);
+            $this->render('templates/admin/users/index.html.twig', ['data' => $data]);
         }
     }
 
@@ -125,7 +125,7 @@ class UserController extends AbstractController
                 'role' => $user->getRole()
             ];
 
-            $this->render('lien page show', ['data' => $data]);
+            $this->render('templates/admin/users/show.html.twig', ['data' => $data]);
         }
     }
 }
