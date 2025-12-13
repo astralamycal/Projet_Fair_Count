@@ -20,7 +20,6 @@ class UserController extends AbstractController
                 {
                     $this->render('auth/login.html.twig', []);
                 }
-                $this->render('home/home.html.twig', ['role'=> $role]);
             }
         }
 
@@ -202,5 +201,15 @@ class UserController extends AbstractController
         {
 
         }
+    }
+
+    public function createdepense() : void
+    {
+        $this->render('member/createDepense.html.twig', []);  //pas sur de si c'est bon mais tkt
+    }
+    
+    public function createremboursement() : void
+    {
+        $this->render('member/createRemboursement.html.twig', []);
     }
 }
