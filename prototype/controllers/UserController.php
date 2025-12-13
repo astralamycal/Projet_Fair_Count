@@ -10,7 +10,7 @@ class UserController extends AbstractController
             $userManager = new UserManager();
             $depenseManager = new DepenseManager();
             $remboursementManager = new RemboursementManager();
-            $this->render('member/profile.html.twig', ["depenses" => $depenseManager->findByName($_SESSION["id"])), "remboursements" => $remboursementManager->findByName($_SESSION["id"]))]);
+            $this->render('member/profile.html.twig', ["depenses" => $depenseManager->findByName($_SESSION["id"]), "remboursements" => $remboursementManager->findByName($_SESSION["id"])]);
         }
 
         else
