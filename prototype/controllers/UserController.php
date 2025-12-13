@@ -7,25 +7,15 @@ class UserController extends AbstractController
     {
         if (isset($_SESSION["id"], $_SESSION["role"])) 
         {
-            if ($_SESSION["role"] === 'ADMIN')
-            {
-                $role = $_SESSION['role'];
-
-                if (isset($_SESSION["id"]) && isset($_SESSION["role"]))
-                {
-                    $this->render('member/profile.html.twig', []);
-                }
-
-                else
-                {
-                    $this->render('auth/login.html.twig', []);
-                }
-            }
+            $userManager = new UserManager();
+            $depenseManager = new DepenseManager();
+            $remboursementManager = new RemboursementManager();
+            $this->render('member/profile.html.twig', ["depenses" => $depenseManager->findByName($_SESSION["id"])), "remboursements" => $remboursementManager->findByName($_SESSION["id"]))]);
         }
 
         else
         {
-            $this->render('home/home.html.twig', []);
+            $this->render('auth/login.html.twig', []);
         }
     }
 
@@ -144,72 +134,150 @@ class UserController extends AbstractController
         }
     }
 
-    public function add(): void
+    public function addDepense() : void
     {
-        if ($_GET('action') === 'depense')
+        if (isset($_SESSION["id"])) 
         {
             $depenseManager = new DepenseManager();
-            $user = $depenseManager->findById($_GET['id']);
+            $categorieManager = new CategorieManager();
+            $userManager = new UserManager();
 
             if (!empty($_POST))
             {
-                if ($userManager->findByEmail($_POST['email']) === null) 
+                if (isset($_POST['categorie_id'], $_POST['montant'], $_POST['date'], $_POST['motif']))
                 {
-                    if ($clearPassword === $_POST['password'])
-                    {
-                        $hashed_password = password_hash($_POST['password'],PASSWORD_DEFAULT);
-                        $user = new User($_POST['username'], $_POST['email'], $hashed_password, $_POST['role']);
-                        $userManager->create($user);
-                        $this->list();
-                    }
+                    $categorie = $categorieManager->findById($_POST['categorie_id']);
+                    $auteur = $userManager->findById($_SESSION['id']);
+                    $date = new DateTime($_POST['date']);
 
-                    else
-                    {
-                        echo "Erreur : Le mot de passe ne correspond pas.";
-                    }
-                }
-
-                else
-                {
-                    echo "Erreur : L'adresse email existe déjà.";
+                    $depense = new Depense($categorie, (int)$_POST['montant'], $auteur, $date, $_POST['motif']);
+                    
+                    $depenseManager->create($depense);
+                    
+                    $this->redirect("..."); 
                 }
             }
-            
             else
             {
-                $this->render('admin/users/create.html.twig', []);
+                $categories = $categorieManager->findAll();
+                $this->render('...', ["categories" => $categories]);
             }
-
-            $data = [
-                'category'=> $user->getCategorie(),
-                'montant'=> $user->getMontant(),
-                'auteur'=> $user->getAuteur(),
-                'date'=> $user->getDate(),
-                'motif'=> $user->getMotif(),
-            ];
-
-            $this->render('member/add.html.twig', ['data'=> $data]);
-
         }
-
-        else if ($_GET('action') === 'remboursement')
-        {
-
-        }
-
         else
         {
-
+            $this->render('auth/login.html.twig', []);
         }
     }
 
-    public function createdepense() : void
+    public function updateDepense() : void
     {
-        $this->render('member/createDepense.html.twig', []);  //pas sur de si c'est bon mais tkt
+        if (isset($_SESSION['id'])) 
+        {
+            $depenseManager = new DepenseManager();
+            $categorieManager = new CategorieManager();
+            
+            $depense = $depenseManager->findById($_GET["id"]);
+
+            if (isset($_POST["categorie_id"], $_POST["montant"], $_POST["date"], $_POST["motif"]))
+            {
+                $categorie = $categorieManager->findById($_POST['categorie_id']);
+                $auteur = $depense->getAuteur(); 
+                $date = new DateTime($_POST['date']);
+
+                $newDepense = new Depense($categorie, (int)$_POST["montant"], $auteur, $date, $_POST["motif"], $depense->getId());
+
+                $depenseManager->update($newDepense);
+                $this->redirect("...");
+            }
+            else
+            {
+                $categories = $categorieManager->findAll();
+                
+                $data = [
+                    'id' => $depense->getId(),
+                    'montant' => $depense->getMontant(),
+                    'motif' => $depense->getMotif(),
+                    'date' => $depense->getDate()->format('Y-m-d'),
+                    'categorie_id' => $depense->getCategorie()->getId()
+                ];
+
+                $this->render('...', ['data' => $data, 'categories' => $categories]);
+            }
+        }
+        else
+        {
+            $this->render('auth/login.html.twig', []);
+        }
     }
-    
-    public function createremboursement() : void
+
+    public function addRemboursement() : void
     {
-        $this->render('member/createRemboursement.html.twig', []);
+        if (isset($_SESSION['id'])) 
+        {
+            $remboursementManager = new RemboursementManager();
+            $userManager = new UserManager();
+
+            if (!empty($_POST))
+            {
+                if (isset($_POST['montant'], $_POST['receveur_id'], $_POST['motif']))
+                {
+                    $auteur = $userManager->findById($_SESSION['id']);
+                    $receveur = $userManager->findById($_POST['receveur_id']);
+
+                    $remboursement = new Remboursement((int)$_POST['montant'], $auteur, $receveur, $_POST['motif']);
+
+                    $remboursementManager->create($remboursement);
+                    $this->redirect("...");
+                }
+            }
+            else
+            {
+                $users = $userManager->findAll();
+                $this->render('...', ["users" => $users]);
+            }
+        }
+        else
+        {
+            $this->render('auth/login.html.twig', []);
+        }
+    }
+
+    public function updateRemboursement() : void
+    {
+        if (isset($_SESSION['id'])) 
+        {
+            $remboursementManager = new RemboursementManager();
+            $userManager = new UserManager();
+            
+            $remboursement = $remboursementManager->findById($_GET["id"]);
+
+            if (isset($_POST["montant"], $_POST["receveur_id"], $_POST["motif"]))
+            {
+                $auteur = $remboursement->getAuteur(); 
+                $receveur = $userManager->findById($_POST["receveur_id"]);
+
+                $newRemboursement = new Remboursement((int)$_POST["montant"], $auteur, $receveur, $_POST["motif"], $remboursement->getId());
+
+                $remboursementManager->update($newRemboursement);
+                $this->redirect("...");
+            }
+            else
+            {
+                $users = $userManager->findAll();
+
+                $data = [
+                    'id' => $remboursement->getId(),
+                    'montant' => $remboursement->getMontant(),
+                    'motif' => $remboursement->getMotif(),
+                    'receveur_id' => $remboursement->getReceveur()->getId()
+                ];
+
+                $this->render('...', ['data' => $data, 'users' => $users]);
+            }
+        }
+        else
+        {
+            $this->render('auth/login.html.twig', []);
+        }
     }
 }

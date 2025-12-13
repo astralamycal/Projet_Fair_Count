@@ -1,5 +1,5 @@
 <?php
-class categorie{
+class Categorie{
     public function __construct(private string $nom, private ? int $id = null){
     }
 

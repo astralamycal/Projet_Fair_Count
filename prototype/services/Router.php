@@ -50,9 +50,21 @@ class Router
             else if($_GET['route'] === 'show') {
                 $this->uc->show();
             }
+            
+            else if($_GET['route'] === 'addDepense') {
+                $this->uc->addDepense();
+            }
 
-            else if($_GET['rouge'] === 'add') {
-                $this->uc->add();
+            else if($_GET['route'] === 'addRemboursement') {
+                $this->uc->addRemboursement();
+            }
+
+            else if($_GET['route'] === 'addDepense') {
+                $this->uc->updateDepense();
+            }
+
+            else if($_GET['route'] === 'addRemboursement') {
+                $this->uc->updateRemboursement();
             }
 
             else
