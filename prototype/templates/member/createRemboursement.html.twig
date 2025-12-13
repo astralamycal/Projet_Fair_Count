@@ -1,0 +1,32 @@
+{% extends "layout.html.twig" %}
+
+{% block header %}
+    {% include "partials/_header.html.twig" %}
+{% endblock %}
+
+{% block main %}
+    <main class="py-5 container">
+        <h1>Ajouter un remboursement</h1>
+        <form method="post" action="index.php?route=ZJVHQDHUJDCHICSGHI DBKZIEDBJCZJHVBKZBVKZHVBJHZEBCKHBEVCKJEZVHCKHZBCJK">
+            <fieldset class="mb-3">
+                <label for="montant" class="form-label">montant</label>
+                <input type="montant" name="montant" id="montant" class="form-control">
+            </fieldset>
+            <fieldset class="mb-3">
+                <label for="auteur" class="form-label">auteur</label>
+                <input type="auteur" name="auteur" id="auteur" class="form-control">
+            </fieldset>
+            <fieldset class="mb-3">
+                <label for="receveur" class="form-label">receveur</label>
+                <input type="receveur" name="receveur" id="receveur" class="form-control">
+            </fieldset>
+            <fieldset class="mb-3">
+                <label for="motif" class="form-label">motif</label>
+                <input type="motif" name="motif" id="motif" class="form-control">
+            </fieldset>
+            <fieldset>
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            </fieldset>
+        </form>
+    </main>
+{% endblock %}
