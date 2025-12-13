@@ -20,7 +20,6 @@ class UserController extends AbstractController
                 {
                     $this->render('auth/login.html.twig', []);
                 }
-                $this->render('home/home.html.twig', ['role'=> $role]);
             }
         }
 
