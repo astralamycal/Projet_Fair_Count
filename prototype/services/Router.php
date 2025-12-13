@@ -51,11 +51,14 @@ class Router
                 $this->uc->show();
             }
 
-            else if($_GET['rouge'] === 'add') {
-                $this->uc->add();
-            }
+            //else if($_GET['rouge'] === 'add') {   //Amy a dit que la méthode allait dégager XD
+                //$this->uc->add();
+            //}
             else if($_GET['route'] === 'createdepense') {
-                $this->createdepense();
+                $this->uc->createdepense();
+            }
+            else if($_GET['route'] === 'createremboursement') {
+                $this->uc->createremboursement();
             }
 
             else
