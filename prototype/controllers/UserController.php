@@ -106,30 +106,45 @@ class UserController extends AbstractController
         }
     }
 
-    public function addDepense(): void
+    public function addDepense() : void
     {
-        if (isset($_SESSION["id"])) {
+        if (isset($_SESSION["id"]))
+        {
             $depenseManager = new DepenseManager();
             $categorieManager = new CategorieManager();
             $userManager = new UserManager();
 
-            if (!empty($_POST)) {
-                if (isset($_POST['categorie_id'], $_POST['montant'], $_POST['date'], $_POST['motif'])) {
+            if (!empty($_POST))
+            {
+                if (isset($_POST['categorie_id'], $_POST['montant'], $_POST['date'], $_POST['motif']))
+                {
                     $categorie = $categorieManager->findById($_POST['categorie_id']);
+                    
                     $auteur = $userManager->findById($_SESSION['id']);
+                    
+                    if (!$auteur) {
+                        session_destroy();
+                        $this->render('auth/login.html.twig', ['error' => 'Session invalide, veuillez vous reconnecter.']);
+                        return;
+                    }
+
                     $date = new DateTime($_POST['date']);
 
-                    $depense = new Depense($categorie, (int) $_POST['montant'], $auteur, $date, $_POST['motif']);
-
+                    $depense = new Depense($categorie, (int)$_POST['montant'], $auteur, $date, $_POST['motif']);
+                    
                     $depenseManager->create($depense);
-
-                    $this->redirect("index.php?route=profile");
+                    
+                    $this->redirect("index.php?route=profile"); 
                 }
-            } else {
+            }
+            else
+            {
                 $categories = $categorieManager->findAll();
                 $this->render('member/createDepense.html.twig', ["categories" => $categories]);
             }
-        } else {
+        }
+        else
+        {
             $this->render('auth/login.html.twig', []);
         }
     }

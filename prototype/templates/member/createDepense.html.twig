@@ -7,19 +7,36 @@
 {% block main %}
     <main class="py-5 container">
         <h1>Ajouter une dépense</h1>
-        <form method="post" action="index.php?route=ZJVHQDHUJDCHICSGHI DBKZIEDBJCZJHVBKZBVKZHVBJHZEBCKHBEVCKJEZVHCKHZBCJK">
+        
+        <form method="post" action="index.php?route=addDepense">
+            
             <fieldset class="mb-3">
                 <label for="montant" class="form-label">Montant</label>
-                <input type="montant" name="montant" id="montant" class="form-control">
+                <input type="number" name="montant" id="montant" class="form-control" required>
             </fieldset>
+
             <fieldset class="mb-3">
-                <label for="auteur" class="form-label">Auteur</label>
-                <input type="auteur" name="auteur" id="auteur" class="form-control">
+                <label for="date" class="form-label">Date</label>
+                <input type="date" name="date" id="date" class="form-control" required>
             </fieldset>
+
             <fieldset class="mb-3">
                 <label for="motif" class="form-label">Motif</label>
-                <input type="motif" name="motif" id="motif" class="form-control">
+                <input type="text" name="motif" id="motif" class="form-control" required>
             </fieldset>
+
+            <fieldset class="mb-3">
+                <label for="categorie-id" class="form-label">Catégorie</label>
+                <select class="form-select" id="categorie-id" name="categorie_id" required>
+                    <option selected disabled>Choisir une catégorie</option>
+                    
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.nom }}</option>
+                    {% endfor %}
+                    
+                </select>
+            </fieldset>
+
             <fieldset>
                 <button type="submit" class="btn btn-primary">Ajouter</button>
             </fieldset>

@@ -8,7 +8,7 @@ class DepenseManager extends AbstractManager
 
     public function create(Depense $depense): Depense
     {
-        $query = $this->db->prepare("INSERT INTO depenses(categorie, montant, auteur, date, motif) VALUES(:categorie, :montant, :date, :motif);");
+        $query = $this->db->prepare("INSERT INTO depenses(categorie, montant, auteur, date, motif) VALUES(:categorie, :auteur, :montant, :date, :motif);");
         $parameters = [
             "categorie" => $depense->getCategorie()->getId(),
             "montant" => $depense->getMontant(),

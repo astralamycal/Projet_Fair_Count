@@ -59,12 +59,20 @@ class Router
                 $this->uc->addRemboursement();
             }
 
-            else if($_GET['route'] === 'addDepense') {
+            else if($_GET['route'] === 'updateDepense') {
                 $this->uc->updateDepense();
             }
 
-            else if($_GET['route'] === 'addRemboursement') {
+            else if($_GET['route'] === 'updateRemboursement') {
                 $this->uc->updateRemboursement();
+            }
+
+            else if($_GET['route'] === 'showDepense') {
+                $this->uc->showDepense();
+            }
+
+            else if($_GET['route'] === 'showRemboursement') {
+                $this->uc->showRemboursement();
             }
 
             else
