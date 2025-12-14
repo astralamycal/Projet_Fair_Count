@@ -38,9 +38,9 @@
                         <td>{{ depense.date }}</td>
                         <td>{{ depense.motif }}</td>
                         <td>
-                            <a href="index.php?route=show&id={{ depense.id }}" class="btn btn-info"><span class="bi bi-eye"></span></a>
-                            <a href="index.php?route=update&id={{ depense.id }}" class="btn btn-success"><span class="bi bi-pencil"></span></a>
-                            <a href="index.php?route=delete&id={{ depense.id }}" class="btn btn-danger"><span class="bi bi-trash"></span></a>
+                            <a href="index.php?route=showDepense&id={{ depense.id }}" class="btn btn-info"><span class="bi bi-eye"></span></a>
+                            <a href="index.php?route=updatesDepense&id={{ depense.id }}" class="btn btn-success"><span class="bi bi-pencil"></span></a>
+                            <a href="index.php?route=deleteDepense&id={{ depense.id }}" class="btn btn-danger"><span class="bi bi-trash"></span></a>
                         </td>
                     </tr>
                 {% endfor %}
