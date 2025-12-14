@@ -131,7 +131,7 @@ class UserController extends AbstractController
                     $date = new DateTime($_POST['date']);
 
                     $depense = new Depense($categorie, (int)$_POST['montant'], $auteur, $date, $_POST['motif']);
-                    
+                    var_dump($depense);
                     $depenseManager->create($depense);
                     
                     $this->redirect("index.php?route=profile"); 
