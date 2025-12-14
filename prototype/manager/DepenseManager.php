@@ -17,8 +17,6 @@ class DepenseManager extends AbstractManager
             "motif" => $depense->getmotif()
         ];
 
-        echo var_dump($parameters);
-
         $query->execute($parameters);
         return $depense;
     }
@@ -27,7 +25,7 @@ class DepenseManager extends AbstractManager
     {
         $query = $this->db->prepare("UPDATE depenses SET categorie = :categorie, montant = :montant, auteur = :auteur, date = :date, motif = :motif WHERE id = :id;");
         $parameters = [
-            "categorie" => $depense->getCategorie(),
+            "categorie" => $depense->getCategorie()->getId(),
             "montant" => $depense->getMontant(),
             "auteur" => $depense->getAuteur()->getId(),
             "date" => $depense->getDate()->format('Y-m-d H:i:s'),
