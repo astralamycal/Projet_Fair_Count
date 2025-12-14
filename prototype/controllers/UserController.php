@@ -247,6 +247,7 @@ class UserController extends AbstractController
         if (isset($_SESSION['id'])) {
             $depenseManager = new DepenseManager();
             $depense = $depenseManager->findById($_GET['id']);
+            $depense = $depense->toArray();
 
             $this->render('member/showDepense.html.twig', ['depense' => $depense]);
         } else {

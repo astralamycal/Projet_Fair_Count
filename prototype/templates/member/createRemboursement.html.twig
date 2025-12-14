@@ -7,25 +7,33 @@
 {% block main %}
     <main class="py-5 container">
         <h1>Ajouter un remboursement</h1>
+        
         <form method="post" action="index.php?route=addRemboursement">
+            
             <fieldset class="mb-3">
                 <label for="montant" class="form-label">Montant</label>
-                <input type="montant" name="montant" id="montant" class="form-control">
+                <input type="number" name="montant" id="montant" class="form-control" required>
             </fieldset>
+
             <fieldset class="mb-3">
-                <label for="auteur" class="form-label">Auteur</label>
-                <input type="auteur" name="auteur" id="auteur" class="form-control">
+                <label for="receveur-id" class="form-label">Receveur (Qui reçoit l'argent ?)</label>
+                <select class="form-select" id="receveur-id" name="receveur_id" required>
+                    <option selected disabled>Choisir un bénéficiaire</option>
+                    
+                    {% for user in users %}
+                        <option value="{{ user.id }}">{{ user.username }}</option>
+                    {% endfor %}
+                    
+                </select>
             </fieldset>
-            <fieldset class="mb-3">
-                <label for="receveur" class="form-label">Receveur</label>
-                <input type="receveur" name="receveur" id="receveur" class="form-control">
-            </fieldset>
+
             <fieldset class="mb-3">
                 <label for="motif" class="form-label">Motif</label>
-                <input type="motif" name="motif" id="motif" class="form-control">
+                <input type="text" name="motif" id="motif" class="form-control" required>
             </fieldset>
+
             <fieldset>
-                <button type="submit" class="btn btn-primary">Ajouter</button>
+                <button type="submit" class="btn btn-primary">Valider le remboursement</button>
             </fieldset>
         </form>
     </main>
