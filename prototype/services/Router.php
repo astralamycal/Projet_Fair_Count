@@ -11,81 +11,51 @@ class Router
         $this->uc = new UserController();
     }
 
-    public function handleRequest() : void
+    public function handleRequest(): void
     {
-        if(!empty($_GET['route'])) {
+        if (!empty($_GET['route'])) {
 
-            if($_GET['route'] === 'home') {
+            if ($_GET['route'] === 'home') {
                 $this->ac->home();
-            }
-
-            else if($_GET['route'] === 'login') {
+            } else if ($_GET['route'] === 'login') {
                 $this->ac->login();
-            }
-
-            else if($_GET['route'] === 'register') {
+            } else if ($_GET['route'] === 'register') {
                 $this->ac->register();
-            }
-
-            else if($_GET['route'] === 'delete') {
+            } else if ($_GET['route'] === 'delete') {
                 $this->uc->delete();
-            }
-
-            else if($_GET['route'] === 'profile') {
+            } else if ($_GET['route'] === 'profile') {
                 $this->uc->profile();
-            }
-
-            else if($_GET['route'] === 'list') {
+            } else if ($_GET['route'] === 'list') {
                 $this->uc->list();
-            }
-
-            else if($_GET['route'] === 'create') {
+            } else if ($_GET['route'] === 'create') {
                 $this->uc->create();
-            }
-
-            else if($_GET['route'] === 'update') {
+            } else if ($_GET['route'] === 'update') {
                 $this->uc->update();
-            }
-
-            else if($_GET['route'] === 'show') {
+            } else if ($_GET['route'] === 'show') {
                 $this->uc->show();
-            }
-            
-            else if($_GET['route'] === 'addDepense') {
+            } else if ($_GET['route'] === 'addDepense') {
                 $this->uc->addDepense();
-            }
-
-            else if($_GET['route'] === 'addRemboursement') {
+            } else if ($_GET['route'] === 'addRemboursement') {
                 $this->uc->addRemboursement();
-            }
-
-            else if($_GET['route'] === 'updateDepense') {
+            } else if ($_GET['route'] === 'updateDepense') {
                 $this->uc->updateDepense();
-            }
-
-            else if($_GET['route'] === 'updateRemboursement') {
+            } else if ($_GET['route'] === 'updateRemboursement') {
                 $this->uc->updateRemboursement();
-            }
-
-            else if($_GET['route'] === 'showDepense') {
+            } else if ($_GET['route'] === 'showDepense') {
                 $this->uc->showDepense();
-            }
-
-            else if($_GET['route'] === 'showRemboursement') {
+            } else if ($_GET['route'] === 'showRemboursement') {
                 $this->uc->showRemboursement();
-            }
-
-            else
-            {
+            } else if ($_GET['route'] === 'deleteRemboursement') {
+                $this->uc->deleteRemboursement();
+            } else if ($_GET['route'] === 'deleteDepense') {
+                $this->uc->deleteDepense();
+            } else {
                 $this->ac->notFound();
             }
 
-            }
-
-            else
-            {
-                $this->ac->home();
-            }
+        } else {
+            $this->ac->home();
         }
-        
     }
+
+}
