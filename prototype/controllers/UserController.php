@@ -106,22 +106,19 @@ class UserController extends AbstractController
         }
     }
 
-    public function addDepense() : void
+    public function addDepense(): void
     {
-        if (isset($_SESSION["id"]))
-        {
+        if (isset($_SESSION["id"])) {
             $depenseManager = new DepenseManager();
             $categorieManager = new CategorieManager();
             $userManager = new UserManager();
 
-            if (!empty($_POST))
-            {
-                if (isset($_POST['categorie_id'], $_POST['montant'], $_POST['date'], $_POST['motif']))
-                {
+            if (!empty($_POST)) {
+                if (isset($_POST['categorie_id'], $_POST['montant'], $_POST['date'], $_POST['motif'])) {
                     $categorie = $categorieManager->findById($_POST['categorie_id']);
-                    
+
                     $auteur = $userManager->findById($_SESSION['id']);
-                    
+
                     if (!$auteur) {
                         session_destroy();
                         $this->render('auth/login.html.twig', ['error' => 'Session invalide, veuillez vous reconnecter.']);
@@ -130,21 +127,17 @@ class UserController extends AbstractController
 
                     $date = new DateTime($_POST['date']);
 
-                    $depense = new Depense($categorie, (int)$_POST['montant'], $auteur, $date, $_POST['motif']);
+                    $depense = new Depense($categorie, (int) $_POST['montant'], $auteur, $date, $_POST['motif']);
                     var_dump($depense);
                     $depenseManager->create($depense);
-                    
-                    $this->redirect("index.php?route=profile"); 
+
+                    $this->redirect("index.php?route=profile");
                 }
-            }
-            else
-            {
+            } else {
                 $categories = $categorieManager->findAll();
                 $this->render('member/createDepense.html.twig', ["categories" => $categories]);
             }
-        }
-        else
-        {
+        } else {
             $this->render('auth/login.html.twig', []);
         }
     }
@@ -172,6 +165,7 @@ class UserController extends AbstractController
                 $data = [
                     'id' => $depense->getId(),
                     'montant' => $depense->getMontant(),
+                    "auteur" => $depense->getAuteur()->getId(),
                     'motif' => $depense->getMotif(),
                     'date' => $depense->getDate()->format('Y-m-d'),
                     'categorie_id' => $depense->getCategorie()->getId()
@@ -260,11 +254,11 @@ class UserController extends AbstractController
         if (isset($_SESSION['id'])) {
             $depenseManager = new DepenseManager();
             $depense = $depenseManager->findById($_GET['id']);
-            
+
             if ($depense) {
                 $depenseManager->delete($depense);
             }
-            
+
             $this->redirect("index.php?route=profile");
         } else {
             $this->render('auth/login.html.twig', []);

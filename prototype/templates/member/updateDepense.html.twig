@@ -7,18 +7,33 @@
 {% block main %}
     <main class="py-5 container">
         <h1>Modifier une dépense</h1>
-        <form method="post" action="index.php?route=updateDepense">
+        <form method="post" action="index.php?route=updateDepense&id={{ data.id }}">
             <fieldset class="mb-3">
                 <label for="montant" class="form-label">montant</label>
-                <input type="montant" name="montant" id="montant" value="{{ montant }}"class="form-control">
+                <input type="montant" name="montant" id="montant" value="{{ data.montant }}"class="form-control">
             </fieldset>
             <fieldset class="mb-3">
                 <label for="auteur" class="form-label">auteur</label>
-                <input type="auteur" name="auteur" id="auteur" value="{{ auteur }}"class="form-control">
+                <input type="auteur" name="auteur" id="auteur" value="{{ data.auteur }}"class="form-control">
             </fieldset>
             <fieldset class="mb-3">
                 <label for="motif" class="form-label">motif</label>
-                <input type="motif" name="motif" id="motif" value="{{ motif }}"class="form-control">
+                <input type="motif" name="motif" id="motif" value="{{ data.motif }}"class="form-control">
+            </fieldset>
+            <fieldset class="mb-3">
+                <label for="date" class="form-label">Date</label>
+                <input type="date" name="date" id="date" class="form-control" value="{{ data.date }}" required>
+            </fieldset>
+            <fieldset class="mb-3">
+                <label for="categorie-id" class="form-label">Catégorie</label>
+                <select class="form-select" id="categorie-id" name="categorie_id" required>
+                    <option selected disabled>Choisir une catégorie</option>
+                    
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.nom }}</option>
+                    {% endfor %}
+                    
+                </select>
             </fieldset>
             <fieldset>
                 <button type="submit" class="btn btn-primary">Modifier</button>
