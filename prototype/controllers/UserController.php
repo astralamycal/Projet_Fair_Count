@@ -123,11 +123,11 @@ class UserController extends AbstractController
 
                     $depenseManager->create($depense);
 
-                    $this->redirect("...");
+                    $this->redirect("index.php?route=profile");
                 }
             } else {
                 $categories = $categorieManager->findAll();
-                $this->render('...', ["categories" => $categories]);
+                $this->render('member/createDepense.html.twig', ["categories" => $categories]);
             }
         } else {
             $this->render('auth/login.html.twig', []);
@@ -183,11 +183,11 @@ class UserController extends AbstractController
                     $remboursement = new Remboursement((int) $_POST['montant'], $auteur, $receveur, $_POST['motif']);
 
                     $remboursementManager->create($remboursement);
-                    $this->redirect("...");
+                    $this->redirect("index.php?route=profile");
                 }
             } else {
                 $users = $userManager->findAll();
-                $this->render('...', ["users" => $users]);
+                $this->render('member/createRemboursement.html.twig', ["users" => $users]);
             }
         } else {
             $this->render('auth/login.html.twig', []);

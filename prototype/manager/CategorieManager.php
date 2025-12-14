@@ -1,5 +1,5 @@
 <?php
-class CategorieManager extends AbstractManager
+class categorieManager extends AbstractManager
 {
     public function __construct()
     {
@@ -44,7 +44,7 @@ class CategorieManager extends AbstractManager
         $query = $this->db->prepare("SELECT * FROM categories;");
         $query->execute();
         $results = $query->fetchAll(PDO::FETCH_ASSOC);
-        $users = [];
+        $categories = [];
 
         foreach ($results as $result) {
             $categories[] = new Categorie($result["nom"], $result["id"]);
