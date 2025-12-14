@@ -1,41 +1,63 @@
 <?php
-class Remboursement{
-    public function __construct(private int $montant, private User $auteur, private User $receveur, private string $motif, private ? int $id = null){
+class Remboursement
+{
+    public function __construct(private int $montant, private User $auteur, private User $receveur, private string $motif, private ?int $id = null)
+    {
     }
 
-    public function getId(): int{
+    public function getId(): int
+    {
         return $this->id;
     }
 
-    public function getMontant(): int{
+    public function getMontant(): int
+    {
         return $this->montant;
     }
 
-    public function getAuteur(): User{
+    public function getAuteur(): User
+    {
         return $this->auteur;
     }
 
-    public function getReceveur(): User{
+    public function getReceveur(): User
+    {
         return $this->receveur;
     }
 
-    public function getMotif(): string{
+    public function getMotif(): string
+    {
         return $this->motif;
     }
 
-    public function setMontant(int $montant): void{
+    public function setMontant(int $montant): void
+    {
         $this->montant = $montant;
     }
 
-    public function setAuteur(User $auteur): void{
+    public function setAuteur(User $auteur): void
+    {
         $this->auteur = $auteur;
     }
 
-    public function setReceveur(User $receveur): void{
+    public function setReceveur(User $receveur): void
+    {
         $this->receveur = $receveur;
     }
 
-    public function setMotif(string $motif): void{
+    public function setMotif(string $motif): void
+    {
         $this->motif = $motif;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'montant' => $this->montant,
+            'auteur' => $this->auteur->toArray(),
+            'receveur' => $this->receveur->toArray(),
+            'motif' => $this->motif
+        ];
     }
 }

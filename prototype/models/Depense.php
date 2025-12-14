@@ -59,4 +59,15 @@ class Depense
     {
         $this->motif = $motif;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'montant' => $this->montant,
+            'auteur' => $this->auteur->toArray(),
+            'date' => $this->date->format("d M Y h:m:s"),
+            'motif' => $this->motif
+        ];
+    }
 }
