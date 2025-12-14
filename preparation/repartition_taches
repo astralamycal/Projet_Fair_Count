@@ -1,14 +1,19 @@
 Nathan:
+
 - Composer setup
 - Ajout du prototype de l'architechture de dossier avec les fichiers de bases
 - des controllers
+- remplissage des pages twig
 
 Sofiane:
-- Création base de données 
+
+- Création base de données
 - création du Router.php
+- remplissage des pages twig
 
 Amy:
-- prototype base de données
+
+- remplissage des pages twig
 - tous les models
 - tous les managers
 - valeurs par défaut dans la base de données
