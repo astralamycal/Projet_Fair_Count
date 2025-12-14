@@ -9,15 +9,15 @@
         <h1>Modifier une dépense</h1>
         <form method="post" action="index.php?route=updateDepense&id={{ data.id }}">
             <fieldset class="mb-3">
-                <label for="montant" class="form-label">montant</label>
+                <label for="montant" class="form-label">Montant</label>
                 <input type="montant" name="montant" id="montant" value="{{ data.montant }}"class="form-control">
             </fieldset>
             <fieldset class="mb-3">
-                <label for="auteur" class="form-label">auteur</label>
+                <label for="auteur" class="form-label">Auteur</label>
                 <input type="auteur" name="auteur" id="auteur" value="{{ data.auteur }}"class="form-control">
             </fieldset>
             <fieldset class="mb-3">
-                <label for="motif" class="form-label">motif</label>
+                <label for="motif" class="form-label">Motif</label>
                 <input type="motif" name="motif" id="motif" value="{{ data.motif }}"class="form-control">
             </fieldset>
             <fieldset class="mb-3">

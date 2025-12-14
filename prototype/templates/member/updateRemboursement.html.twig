@@ -7,23 +7,41 @@
 {% block main %}
     <main class="py-5 container">
         <h1>Modifier un remboursement</h1>
-        <form method="post" action="index.php?route=updateRemboursement">
+        
+        <form method="post" action="index.php?route=updateRemboursement&id={{data.id}}">
+            
             <fieldset class="mb-3">
-                <label for="montant" class="form-label">montant</label>
-                <input type="montant" name="montant" id="montant" value="{{ montant }}"class="form-control">
+                <label for="montant" class="form-label">Montant</label>
+                <input type="number" name="montant" id="montant" value="{{ data.montant }}" class="form-control" required>
             </fieldset>
+
             <fieldset class="mb-3">
-                <label for="auteur" class="form-label">auteur</label>
-                <input type="auteur" name="auteur" id="auteur" value="{{ auteur }}"class="form-control">
+                <label for="receveur-id" class="form-label">Receveur (Qui reçoit l'argent ?)</label>
+                
+                <select class="form-select" id="receveur-id" name="receveur_id" required>
+                    <option selected disabled>Choisir un bénéficiaire</option>
+                    
+                    {% for user in users %}
+                        <option value="{{ user.id }}" 
+                            {% if user.id == data.receveur_id %}selected{% endif %}>
+                            
+                            {{ user.username }} 
+                            
+                        </option>
+                    {% endfor %}
+                </select>
             </fieldset>
+
             <fieldset class="mb-3">
-                <label for="receveur" class="form-label">receveur</label>
-                <input type="receveur" name="receveur" id="receveur" value="{{ receveur }}"class="form-control">
+                <label for="date" class="form-label">Date</label>
+                <input type="date" name="date" id="date" class="form-control" value="{{ data.date }}" required>
             </fieldset>
+            
             <fieldset class="mb-3">
-                <label for="motif" class="form-label">motif</label>
-                <input type="motif" name="motif" id="motif" value="{{ motif }}"class="form-control">
+                <label for="motif" class="form-label">Motif</label>
+                <input type="text" name="motif" id="motif" value="{{ data.motif }}" class="form-control">
             </fieldset>
+            
             <fieldset>
                 <button type="submit" class="btn btn-primary">Modifier</button>
             </fieldset>
