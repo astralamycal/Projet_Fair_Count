@@ -177,7 +177,7 @@ class UserController extends AbstractController
                     'categorie_id' => $depense->getCategorie()->getId()
                 ];
 
-                $this->render('member/updateRemboursement.html.twig', ['data' => $data, 'categories' => $categories]);
+                $this->render('member/updateDepense.html.twig', ['data' => $data, 'categories' => $categories]);
             }
         } else {
             $this->render('auth/login.html.twig', []);
