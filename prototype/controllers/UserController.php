@@ -150,7 +150,7 @@ class UserController extends AbstractController
                 $newDepense = new Depense($categorie, (int) $_POST["montant"], $auteur, $date, $_POST["motif"], $depense->getId());
 
                 $depenseManager->update($newDepense);
-                $this->redirect("...");
+                $this->redirect("index.php?route=profile");
             } else {
                 $categories = $categorieManager->findAll();
 
@@ -162,7 +162,7 @@ class UserController extends AbstractController
                     'categorie_id' => $depense->getCategorie()->getId()
                 ];
 
-                $this->render('...', ['data' => $data, 'categories' => $categories]);
+                $this->render('member/updateRemboursement.html.twig', ['data' => $data, 'categories' => $categories]);
             }
         } else {
             $this->render('auth/login.html.twig', []);
@@ -209,7 +209,7 @@ class UserController extends AbstractController
                 $newRemboursement = new Remboursement((int) $_POST["montant"], $auteur, $receveur, $_POST["motif"], $remboursement->getId());
 
                 $remboursementManager->update($newRemboursement);
-                $this->redirect("...");
+                $this->redirect("index.php?route=profile");
             } else {
                 $users = $userManager->findAll();
 
@@ -220,10 +220,67 @@ class UserController extends AbstractController
                     'receveur_id' => $remboursement->getReceveur()->getId()
                 ];
 
-                $this->render('...', ['data' => $data, 'users' => $users]);
+                $this->render('member/updateRemboursement.html.twig', ['data' => $data, 'users' => $users]);
             }
         } else {
             $this->render('auth/login.html.twig', []);
         }
     }
+
+    public function showDepense(): void
+    {
+        if (isset($_SESSION['id'])) {
+            $depenseManager = new DepenseManager();
+            $depense = $depenseManager->findById($_GET['id']);
+
+            $this->render('member/showDepense.html.twig', ['depense' => $depense]);
+        } else {
+            $this->render('auth/login.html.twig', []);
+        }
+    }
+
+    public function deleteDepense(): void
+    {
+        if (isset($_SESSION['id'])) {
+            $depenseManager = new DepenseManager();
+            $depense = $depenseManager->findById($_GET['id']);
+            
+            if ($depense) {
+                $depenseManager->delete($depense);
+            }
+            
+            $this->redirect("index.php?route=profile");
+        } else {
+            $this->render('auth/login.html.twig', []);
+        }
+    }
+
+    public function showRemboursement(): void
+    {
+        if (isset($_SESSION['id'])) {
+            $remboursementManager = new RemboursementManager();
+            $remboursement = $remboursementManager->findById($_GET['id']);
+
+            $this->render('member/showRemboursement.html.twig', ['remboursement' => $remboursement]);
+        } else {
+            $this->render('auth/login.html.twig', []);
+        }
+    }
+
+    public function deleteRemboursement(): void
+    {
+        if (isset($_SESSION['id'])) {
+            $remboursementManager = new RemboursementManager();
+            $remboursement = $remboursementManager->findById($_GET['id']);
+
+            if ($remboursement) {
+                $remboursementManager->delete($remboursement);
+            }
+
+            $this->redirect("index.php?route=profile");
+        } else {
+            $this->render('auth/login.html.twig', []);
+        }
+    }
+
 }
