@@ -168,7 +168,7 @@ class UserController extends AbstractController
                     "auteur" => $depense->getAuteur()->getId(),
                     'motif' => $depense->getMotif(),
                     'date' => $depense->getDate()->format('Y-m-d'),
-                    'categorie_id' => $depense->getCategorie()->getId()
+                    'categorie' => $depense->getCategorie()->getNom()
                 ];
 
                 $this->render('member/updateDepense.html.twig', ['data' => $data, 'categories' => $categories]);

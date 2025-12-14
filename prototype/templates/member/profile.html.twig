@@ -26,6 +26,9 @@
                         Motif
                     </th>
                     <th>
+                        categorie
+                    </th>
+                    <th>
                         Actions
                     </th>
                 </tr>
@@ -37,6 +40,7 @@
                         <td>{{ depense.montant }}</td>
                         <td>{{ depense.date }}</td>
                         <td>{{ depense.motif }}</td>
+                        <td>{{ depense.categorie.nom }}</td>
                         <td>
                             <a href="index.php?route=showDepense&id={{ depense.id }}" class="btn btn-info"><span class="bi bi-eye"></span></a>
                             <a href="index.php?route=updateDepense&id={{ depense.id }}" class="btn btn-success"><span class="bi bi-pencil"></span></a>

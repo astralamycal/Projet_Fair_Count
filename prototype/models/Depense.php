@@ -67,7 +67,8 @@ class Depense
             'montant' => $this->montant,
             'auteur' => $this->auteur->toArray(),
             'date' => $this->date->format("d M Y h:m:s"),
-            'motif' => $this->motif
+            'motif' => $this->motif,
+            'categorie' => $this->categorie->toArray(),
         ];
     }
 }
