@@ -1,5 +1,5 @@
 <?php
-class categorieManager extends AbstractManager
+class CategorieManager extends AbstractManager
 {
     public function __construct()
     {
