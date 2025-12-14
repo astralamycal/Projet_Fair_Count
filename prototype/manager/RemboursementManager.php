@@ -82,7 +82,8 @@ class RemboursementManager extends AbstractManager
         $remboursements = [];
 
         foreach ($results as $result) {
-            $remboursements[] = new Remboursement($result["montant"], $userManager->findById($result["auteur"]), $userManager->findById($result["receveur"]), $result["motif"], $result["id"]);
+            $temp = new Remboursement($result["montant"], $userManager->findById($result["auteur"]), $userManager->findById($result["receveur"]), $result["motif"], $result["id"]);
+            $remboursements[] = $temp->toArray();
         }
 
         $query = $this->db->prepare("SELECT * FROM remboursements WHERE receveur = :id;");
@@ -90,7 +91,8 @@ class RemboursementManager extends AbstractManager
         $results = $query->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($results as $result) {
-            $remboursements[] = new Remboursement($result["montant"], $userManager->findById($result["auteur"]), $userManager->findById($result["receveur"]), $result["motif"], $result["id"]);
+            $temp = new Remboursement($result["montant"], $userManager->findById($result["auteur"]), $userManager->findById($result["receveur"]), $result["motif"], $result["id"]);
+            $remboursements[] = $temp->toArray();
         }
 
         return $remboursements;

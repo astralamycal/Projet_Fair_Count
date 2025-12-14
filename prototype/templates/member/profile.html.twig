@@ -31,8 +31,9 @@
                 {% for depense in depenses %}
                     <tr>
                         <td>{{ depense.id }}</td>
-                        <td>{{ depense.date }}</td>
                         <td>{{ depense.montant }}</td>
+                        <td>{{ depense.date }}</td>
+                        <td>{{ depense.motif }}</td>
                         <td>
                             <a href="index.php?route=show&id={{ depense.id }}" class="btn btn-info"><span class="bi bi-eye"></span></a>
                             <a href="index.php?route=update&id={{ depense.id }}" class="btn btn-success"><span class="bi bi-pencil"></span></a>

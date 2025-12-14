@@ -89,7 +89,8 @@ class DepenseManager extends AbstractManager
         $depenses = [];
 
         foreach ($results as $result) {
-            $depenses[] = new Depense($categorieManager->findById($result["categorie"]), $result["montant"], $userManager->findById($result["auteur"]), new DateTime($result["date"]), $result["motif"], $result["id"]);
+            $temp = new Depense($categorieManager->findById($result["categorie"]), $result["montant"], $userManager->findById($result["auteur"]), new DateTime($result["date"]), $result["motif"], $result["id"]);
+            $depenses[] = $temp->toArray();
         }
 
         return $depenses;
