@@ -22,7 +22,7 @@ class RemboursementManager extends AbstractManager
 
     public function update(Remboursement $remboursement): Remboursement
     {
-        $query = $this->db->prepare("UPDATE users SET montant = :montant, auteur = :auteur, receveur = :receveur, motif = :motif WHERE id = :id;");
+        $query = $this->db->prepare("UPDATE remboursements SET montant = :montant, auteur = :auteur, receveur = :receveur, motif = :motif WHERE id = :id;");
         $parameters = [
             "montant" => $remboursement->getMontant(),
             "auteur" => $remboursement->getAuteur()->getId(),
@@ -36,7 +36,7 @@ class RemboursementManager extends AbstractManager
 
     public function delete(Remboursement $remboursement): void
     {
-        $query = $this->db->prepare("DELETE FROM users WHERE id = :id;");
+        $query = $this->db->prepare("DELETE FROM remboursements WHERE id = :id;");
         $parameters = [
             "id" => $remboursement->getId()
         ];
@@ -47,7 +47,7 @@ class RemboursementManager extends AbstractManager
     public function findAll(): array
     {
         $userManager = new UserManager();
-        $query = $this->db->prepare("SELECT * FROM users;");
+        $query = $this->db->prepare("SELECT * FROM remboursements;");
         $query->execute();
         $results = $query->fetchAll(PDO::FETCH_ASSOC);
         $remboursements = [];
@@ -62,7 +62,7 @@ class RemboursementManager extends AbstractManager
     public function findById(int $id): ?Remboursement
     {
         $userManager = new UserManager();
-        $query = $this->db->prepare("SELECT * FROM users WHERE id = :id;");
+        $query = $this->db->prepare("SELECT * FROM remboursements WHERE id = :id;");
         $parameters = ["id" => $id];
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
@@ -70,5 +70,29 @@ class RemboursementManager extends AbstractManager
         if ($result) {
             return new Remboursement($result["montant"], $userManager->findById($result["auteur"]), $userManager->findById($result["receveur"]), $result["motif"], $result["id"]);
         }
+    }
+
+    public function findByName(int $id): array
+    {
+        $userManager = new UserManager();
+        $query = $this->db->prepare("SELECT * FROM remboursements WHERE auteur = :id;");
+        $parameters = ["id" => $id];
+        $query->execute($parameters);
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+        $remboursements = [];
+
+        foreach ($results as $result) {
+            $remboursements[] = new Remboursement($result["montant"], $userManager->findById($result["auteur"]), $userManager->findById($result["receveur"]), $result["motif"], $result["id"]);
+        }
+
+        $query = $this->db->prepare("SELECT * FROM remboursements WHERE receveur = :id;");
+        $query->execute($parameters);
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($results as $result) {
+            $remboursements[] = new Remboursement($result["montant"], $userManager->findById($result["auteur"]), $userManager->findById($result["receveur"]), $result["motif"], $result["id"]);
+        }
+
+        return $remboursements;
     }
 }

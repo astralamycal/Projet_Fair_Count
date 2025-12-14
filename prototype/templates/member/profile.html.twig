@@ -28,7 +28,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for depense in data.depenses %}
+                {% for depense in depenses %}
                     <tr>
                         <td>{{ depense.id }}</td>
                         <td>{{ depense.date }}</td>
@@ -69,7 +69,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for remboursement in data.remboursements %}
+                {% for remboursement in remboursements %}
                     <tr>
                         <td>{{ remboursement.id }}</td>
                         <td>{{ remboursement.montant }}</td>

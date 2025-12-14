@@ -77,4 +77,21 @@ class DepenseManager extends AbstractManager
         }
         return null;
     }
+
+    public function findByName(int $id): array
+    {
+        $categorieManager = new CategorieManager();
+        $userManager = new UserManager();
+        $query = $this->db->prepare("SELECT * FROM depenses WHERE auteur = :id;");
+        $parameters = ["id" => $id];
+        $query->execute($parameters);
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+        $depenses = [];
+
+        foreach ($results as $result) {
+            $depenses[] = new Depense($categorieManager->findById($result["categorie"]), $result["montant"], $userManager->findById($result["auteur"]), new DateTime($result["date"]), $result["motif"], $result["id"]);
+        }
+
+        return $depenses;
+    }
 }
